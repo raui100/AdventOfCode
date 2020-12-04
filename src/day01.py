@@ -12,6 +12,7 @@ def iter_list(number_of_entries: int) -> int:
 
     Returns:
         Product of the years that sum two 2020 if a solution is possible
+
     Raises:
         RuntimeError: There is no possible solution
     """
