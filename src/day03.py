@@ -1,4 +1,3 @@
-from collections import namedtuple
 from math import prod
 
 from lib.paths import data_directory
@@ -6,9 +5,19 @@ from lib.paths import data_directory
 
 def encounters(steps_right: int, steps_down: int):
     """Determines encounters with the given parameters"""
-    position = namedtuple("Position", "x y")
-    positions = [position(x_pos, (steps_right * x_pos) % map_len) for x_pos in range(0, len(data), steps_down)]
-    return sum(map(lambda pos: data[pos.x][pos.y] == "#", positions))
+    count = 0
+    print(f"r: {steps_right}, d: {steps_down}")
+    for index, pos_x in enumerate(range(0, len(data), steps_down)):
+        pos_y = (steps_right * index) % map_len
+        char = data[pos_x][pos_y]
+        if char == "#":
+            count += 1
+        print(" ".join(data[pos_x]))
+        print("  " * pos_y + char + " <- " + str(count))
+
+    print("-" * 80)
+
+    return count
 
 
 data = (data_directory / "day03.txt").read_text().split("\n")  # Splits the file at every newline
