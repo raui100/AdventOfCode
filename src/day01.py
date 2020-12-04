@@ -26,7 +26,13 @@ def iter_list(number_of_entries: int) -> int:
         raise RuntimeError(f"There is no possible solution for {number_of_entries} number of entries")
 
 
-years: list = [int(d) for d in (data_directory / "input").read_text().split()]  # Casts file to list of integer
-iterable_years = range(len(years) - 1)
-print(iter_list(2))
-print(iter_list(3))
+def day01():
+    """Solution to day 1"""
+    return iter_list(2)
+
+
+if __name__ == "__main__":
+    years: list = [int(d) for d in (data_directory / "day01.txt").read_text().split()]  # Casts file to list of integer
+    iterable_years = range(len(years) - 1)
+    print(iter_list(2))
+    print(iter_list(3))
