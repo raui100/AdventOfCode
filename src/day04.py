@@ -1,9 +1,24 @@
 from lib.paths import data_directory
+import re
+
+
+def re_range(prefix: str, low: int, up: int, postfix: str = ""):
+    """Creates a regex for a numeric range"""
+    lst_range = [str(i) for i in range(low, up + 1)]
+    str_range = f"({'|'.join(lst_range)})"
+    return re.compile(prefix + str_range + postfix)
 
 
 data = (data_directory / "day04.txt").read_text().split("\n\n")
-matches = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
-matches = [match + ":" for match in matches]  # Appends ':' to every string
+patterns = \
+    {
+        "birth_year": re_range("byr:", 1920, 2002),
+        "issue_year": re_range("iyr:", 2010, 2020),
+        "expiration_year": re_range("eyr:", 2020, 2030),
+        "height": re.compile(re_range("hgt:", 150, 193, "cm").pattern + "|" + re_range("hgt:", 59, 76, "in").pattern),
+        "hair_color": re.compile(r"hcl:#([0-9a-f]{6})"),
+        "eye_color": re.compile(r"ecl:(amb|blu|brn|gry|grn|hzl|oth)"),
+        "passport_identity": re.compile(r"\b\d{9}\b")
+    }
 
-print(sum([all(match in passport for match in matches) for passport in data]))
-
+print(sum([all(map(lambda x: x.search(passport) is not None, patterns.values())) for passport in data]))
