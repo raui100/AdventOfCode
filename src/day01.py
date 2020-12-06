@@ -1,4 +1,4 @@
-from itertools import product
+from itertools import combinations_with_replacement
 from math import prod
 
 from lib.paths import data_directory
@@ -16,7 +16,7 @@ def iter_list(number_of_entries: int) -> int:
     Raises:
         RuntimeError: There is no possible solution
     """
-    for indices in product(*(iterable_years,) * number_of_entries):
+    for indices in combinations_with_replacement(iterable_years, number_of_entries):
         if sum(valid_years := [years[index] for index in indices]) == 2020:
 
             return prod(valid_years)
@@ -28,11 +28,11 @@ def iter_list(number_of_entries: int) -> int:
 
 def day01():
     """Solution to day 1"""
-    return iter_list(2)
+    return iter_list(3)
 
 
 if __name__ == "__main__":
     years: list = [int(d) for d in (data_directory / "day01.txt").read_text().split()]  # Casts file to list of integer
-    iterable_years = range(len(years) - 1)
-    print(iter_list(2))
-    print(iter_list(3))
+    iterable_years = list(range(len(years)))
+    for i in range(2, 20):
+        print(iter_list(i))
