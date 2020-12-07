@@ -1,8 +1,8 @@
-from lib.paths import data_directory
+from lib.paths import get_day
 from math import prod
 
-data = [c == "#" for c in "".join((data_directory / "day03.txt").read_text().split())]
-width = len((data_directory / "day03.txt").read_text().split()[0])
+data = [c == "#" for c in "".join(get_day(3).read_text().split())]
+width = len(get_day(3).read_text().split()[0])
 length = int(len(data) / width)
 paths = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
 print(prod(map(lambda x: sum([data[ind] for ind in [x[1] * i * width + (x[0] * i) % width

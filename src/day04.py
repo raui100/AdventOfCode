@@ -1,4 +1,4 @@
-from lib.paths import data_directory
+from lib.paths import get_day
 import re
 
 
@@ -9,7 +9,7 @@ def re_range(prefix: str, low: int, up: int, postfix: str = ""):
     return re.compile(prefix + str_range + postfix)
 
 
-data = (data_directory / "day04.txt").read_text().split("\n\n")
+data = get_day(4).read_text().split("\n\n")
 patterns = \
     {
         "birth_year": re_range("byr:", 1920, 2002),
