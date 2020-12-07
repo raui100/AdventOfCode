@@ -1,10 +1,10 @@
 from contextlib import suppress
 
-from lib.paths import data_directory
+from lib.paths import get_day
 import re
 
 
-data = (data_directory / "day02.txt").read_text().split("\n")  # Splits the file at every newline
+data = get_day(2).read_text().split("\n")  # Splits the file at every newline
 regex = re.compile(r"(\d+)-(\d+) (\w): (\w+)")
 valid_password = 0
 for entry in data:

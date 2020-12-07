@@ -1,7 +1,7 @@
 from itertools import combinations_with_replacement
 from math import prod
 
-from lib.paths import data_directory
+from lib.paths import get_day
 
 
 def iter_list(number_of_entries: int) -> int:
@@ -26,13 +26,7 @@ def iter_list(number_of_entries: int) -> int:
         raise RuntimeError(f"There is no possible solution for {number_of_entries} number of entries")
 
 
-def day01():
-    """Solution to day 1"""
-    return iter_list(3)
-
-
 if __name__ == "__main__":
-    years: list = [int(d) for d in (data_directory / "day01.txt").read_text().split()]  # Casts file to list of integer
+    years: list = [int(d) for d in get_day(1).read_text().split()]  # Casts file to list of integer
     iterable_years = list(range(len(years)))
-    for i in range(2, 20):
-        print(iter_list(i))
+    print(iter_list(3))
