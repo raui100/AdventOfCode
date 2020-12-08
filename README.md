@@ -21,18 +21,18 @@
 
 ## Day 3
 **Must read**  
-├[Modulo](https://www.geeksforgeeks.org/what-is-a-modulo-operator-in-python/)
+└[Modulo](https://www.geeksforgeeks.org/what-is-a-modulo-operator-in-python/)
 
 **Can read**  
 ├[Named Tuple](https://docs.python.org/3/library/collections.html#collections.namedtuple)  
-├[Enumerate](https://docs.python.org/3/library/functions.html?highlight=enumerate#enumerate)
+└[Enumerate](https://docs.python.org/3/library/functions.html?highlight=enumerate#enumerate)
 
 ## Day 4
 You'll have to use regular expressions here.  
 **Must read (have been linked before)**  
 ├[Regex](https://docs.python.org/3/howto/regex.html)  
 ├[Regex Testing](https://regexr.com/)  
-├[Lambda functions](https://www.w3schools.com/python/python_lambda.asp)
+└[Lambda functions](https://www.w3schools.com/python/python_lambda.asp)
 
 <details>
   <summary>Spoiler:I have written this function you can use</summary>
@@ -49,10 +49,10 @@ def re_range(prefix: str, low: int, up: int, postfix: str = ""):
 
 ## Day 5
 **Must read**  
-├[Python binary function](https://docs.python.org/3/library/functions.html?highlight=enumerate#bin)  
+└[Python binary function](https://docs.python.org/3/library/functions.html?highlight=enumerate#bin)  
 
 **Can read**  
-├[Zahlendarstellung (DE)](https://www.inf.hs-flensburg.de/lang/informatik/zahlendarstellung.htm)
+└[Zahlendarstellung (DE)](https://www.inf.hs-flensburg.de/lang/informatik/zahlendarstellung.htm)
 
 
 ## Days 6
