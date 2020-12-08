@@ -3,7 +3,7 @@ import re
 
 
 def re_range(prefix: str, low: int, up: int, postfix: str = ""):
-    """Creates a regex for a numeric range"""
+    """Creates a regex for a numeric range"""  # e.g. re_range("byr:", 1920, 2002),
     lst_range = [str(i) for i in range(low, up + 1)]
     str_range = f"({'|'.join(lst_range)})"
     return re.compile(prefix + str_range + postfix)
