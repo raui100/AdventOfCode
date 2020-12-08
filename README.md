@@ -1,55 +1,37 @@
 # Advent of Code
 ## Day 1
-**Must read**
-
-├Overview of [built in functions](https://docs.python.org/3/library/functions.html)
-
-├[math.prod (product)](https://docs.python.org/3/library/math.html#math.prod)
-
-├[Slicing & Indexing](https://towardsdatascience.com/the-basics-of-indexing-and-slicing-python-lists-2d12c90a94cf)
-
+**Must read**  
+├Overview of [built in functions](https://docs.python.org/3/library/functions.html)  
+├[math.prod (product)](https://docs.python.org/3/library/math.html#math.prod)  
+├[Slicing & Indexing](https://towardsdatascience.com/the-basics-of-indexing-and-slicing-python-lists-2d12c90a94cf)  
 └[list comprehension](https://www.python-kurs.eu/list_comprehension.php)
 
-**Can read**
-
-├[Pathlib](https://docs.python.org/3/library/pathlib.html)
-
-├[Exceptions](https://docs.python.org/3/tutorial/errors.html)
-
-├[math library](https://docs.python.org/3/library/math.html)
-
+**Can read**  
+├[Pathlib](https://docs.python.org/3/library/pathlib.html)  
+├[Exceptions](https://docs.python.org/3/tutorial/errors.html)  
+├[math library](https://docs.python.org/3/library/math.html)  
 └[Walrus operator](https://realpython.com/lessons/assignment-expressions/)
 
 ## Day 2
-**Must read**
-
-├[Regex](https://docs.python.org/3/howto/regex.html)
-
-├[Regex Testing](https://regexr.com/)
-
-├[Context Manager](https://stackabuse.com/python-context-managers/)
-
+**Must read**  
+├[Regex](https://docs.python.org/3/howto/regex.html)  
+├[Regex Testing](https://regexr.com/)  
+├[Context Manager](https://stackabuse.com/python-context-managers/)  
 └[Casting](https://www.w3schools.com/python/python_casting.asp)
 
 ## Day 3
-**Must read**
-
+**Must read**  
 ├[Modulo](https://www.geeksforgeeks.org/what-is-a-modulo-operator-in-python/)
 
-**Can read**
-├[Named Tuple](https://docs.python.org/3/library/collections.html#collections.namedtuple)
-
+**Can read**  
+├[Named Tuple](https://docs.python.org/3/library/collections.html#collections.namedtuple)  
 ├[Enumerate](https://docs.python.org/3/library/functions.html?highlight=enumerate#enumerate)
 
 ## Day 4
-You'll have to use regular expressions here.
-
-**Must read (have been linked before)**
-
-├[Regex](https://docs.python.org/3/howto/regex.html)
-
-├[Regex Testing](https://regexr.com/)
-
+You'll have to use regular expressions here.  
+**Must read (have been linked before)**  
+├[Regex](https://docs.python.org/3/howto/regex.html)  
+├[Regex Testing](https://regexr.com/)  
 ├[Lambda functions](https://www.w3schools.com/python/python_lambda.asp)
 
 <details>
@@ -66,28 +48,20 @@ def re_range(prefix: str, low: int, up: int, postfix: str = ""):
 </details>
 
 ## Day 5
-**Must read**
+**Must read**  
+├[Python binary function](https://docs.python.org/3/library/functions.html?highlight=enumerate#bin)  
 
-├[Python binary function](https://docs.python.org/3/library/functions.html?highlight=enumerate#bin)
-
-**Can read**
-
+**Can read**  
 ├[Zahlendarstellung (DE)](https://www.inf.hs-flensburg.de/lang/informatik/zahlendarstellung.htm)
 
 
 ## Days 6
-**Must read** 
-
-├[Mengenlehre (DE)](https://www.mathebibel.de/mengenlehre)
-
-├[Python sets - Docs](https://docs.python.org/3/library/stdtypes.html#set)
-
-├[Python intersection](https://docs.python.org/3/library/stdtypes.html#frozenset.intersection)
-
-├[Python tuple](https://docs.python.org/3/library/stdtypes.html#tuple)
-
-├[Python zip](https://docs.python.org/3/library/functions.html#zip)
-
+**Must read**  
+├[Mengenlehre (DE)](https://www.mathebibel.de/mengenlehre)  
+├[Python sets - Docs](https://docs.python.org/3/library/stdtypes.html#set)  
+├[Python intersection](https://docs.python.org/3/library/stdtypes.html#frozenset.intersection)  
+├[Python tuple](https://docs.python.org/3/library/stdtypes.html#tuple)  
+├[Python zip](https://docs.python.org/3/library/functions.html#zip)  
 └[Python sets - Tutorial](https://realpython.com/python-sets/)
 
 The tutorial is missing something very crucial though...
