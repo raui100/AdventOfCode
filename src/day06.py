@@ -12,7 +12,7 @@ def intersecting_entries(group: str) -> int:
     ]  # Deletes every char that is not a-z
     entries: List[Set[str]] = [set(entry) for entry in entries]
 
-    return len(set.intersection(*tuple(entries)))
+    return len(set.intersection(*entries))
 
 
 if __name__ == "__main__":
