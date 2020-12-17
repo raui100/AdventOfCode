@@ -15,5 +15,6 @@ def intersecting_entries(group: str) -> int:
     return len(set.intersection(*tuple(entries)))
 
 
-data: List[str] = get_day(6).read_text().split("\n\n")  # Splits data into groups
-print(sum([intersecting_entries(group) for group in data]))
+if __name__ == "__main__":
+    data: List[str] = get_day(6).read_text().split("\n\n")  # Splits data into groups
+    print(sum([intersecting_entries(group) for group in data]))
