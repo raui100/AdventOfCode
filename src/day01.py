@@ -23,10 +23,14 @@ def iter_list(number_of_entries: int) -> int:
 
     else:
 
-        raise RuntimeError(f"There is no possible solution for {number_of_entries} number of entries")
+        raise RuntimeError(
+            f"There is no possible solution for {number_of_entries} number of entries"
+        )
 
 
 if __name__ == "__main__":
-    years: list = [int(d) for d in get_day(1).read_text().split()]  # Casts file to list of integer
+    years: list = [
+        int(d) for d in get_day(1).read_text().split()
+    ]  # Casts file to list of integer
     iterable_years = list(range(len(years)))
     print(iter_list(3))

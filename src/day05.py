@@ -14,7 +14,9 @@ def decode(seat: str) -> int:
 
 
 if __name__ == "__main__":
-    data: List[str] = get_day(5).read_text().splitlines()  # Reads the data as list of lines
+    data: List[str] = (
+        get_day(5).read_text().splitlines()
+    )  # Reads the data as list of lines
     data: List[int] = list(map(decode, data))  # Decodes the data to base 10 integer
 
     for seat_id in range(1, max(data)):
