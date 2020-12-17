@@ -19,4 +19,3 @@ for entry in data:
             valid_password += 1
 
 print(valid_password)
-
