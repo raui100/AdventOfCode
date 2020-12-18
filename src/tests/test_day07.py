@@ -1,10 +1,12 @@
+from typing import List
+
 from src.day07 import (
-    get_bag_with_content_and_count,
     Bag,
+    Bags,
     BagQuantity,
     get_primary_bag,
-    structure_bags,
     get_secondary_bags,
+    get_secondary_bags_with_count,
 )
 from pytest import fixture
 
@@ -29,6 +31,13 @@ def bag_2() -> Bag:
     return Bag("muted yellow")
 
 
+@fixture
+def example() -> List[str]:
+    return """shiny gold bags contain 2 dark red bags, 3 muted yellow bags.
+dark red bags contain no other bags.
+muted yellow bags contain 1 dark red bags.""".splitlines()
+
+
 def test_bag(bag_1, bag_2):
     """Tests the 'Bag' class"""
     assert Bag("Test").description == "Test"  # Has attribute `description`
@@ -44,22 +53,6 @@ def test_bag_quantity(bag_1):
     assert bag_quantity == bag_quantity  # Is comparable
 
 
-def test_get_bag_content(line, subject_bag, bag_1, bag_2):
-    assert get_bag_with_content_and_count(line)[0] == subject_bag
-    assert get_bag_with_content_and_count(line)[1] == [
-        BagQuantity(bag_1, 1),
-        BagQuantity(bag_2, 2),
-    ]
-
-    assert (
-        get_bag_with_content_and_count("light red bags contain no other bags.")[0]
-        == subject_bag
-    )
-    assert (
-        get_bag_with_content_and_count("light red bags contain no other bags.")[1] == []
-    )
-
-
 def test_get_primary_bag(line, subject_bag):
     assert get_primary_bag(line) == subject_bag
 
@@ -68,7 +61,15 @@ def test_get_secondary_bags(line, bag_1, bag_2):
     assert get_secondary_bags(line) == [bag_1, bag_2]
 
 
-def test_structure_bags(line, subject_bag, bag_1, bag_2):
-    assert structure_bags([line]) == {
-        subject_bag: [BagQuantity(bag_1, 1), BagQuantity(bag_2, 2)]
-    }
+def test_get_secondary_bags_with_count(line, bag_1, bag_2):
+    assert get_secondary_bags_with_count(line) == [
+        BagQuantity(bag_1, 1),
+        BagQuantity(bag_2, 2),
+    ]
+
+
+def test_bags(example):
+    """Tests the `Bags` class"""
+    wanted_bag = Bag("shiny gold")
+    bags = Bags(example)
+    assert bags.count_bags_inside(wanted_bag) == 8

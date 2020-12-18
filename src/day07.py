@@ -30,25 +30,38 @@ def get_secondary_bags(line: str) -> List[Bag]:
     return [Bag(bag) for bag in re.findall(r"\d+ (\w+ \w+)", line)]
 
 
-def get_bag_with_content_and_count(line: str) -> Tuple[Bag, List[BagQuantity]]:
+def get_secondary_bags_with_count(line: str) -> List[BagQuantity]:
     """Determines which other bags one subject bag can have"""
-    subject_bag = get_primary_bag(line)
     matches = re.findall(r"((\d+) (\w+ \w+))", line)
-    return subject_bag, [BagQuantity(Bag(bag), int(count)) for _, count, bag in matches]
+    return [BagQuantity(Bag(bag), int(count)) for _, count, bag in matches]
 
 
-def structure_bags(data: List[str]) -> Dict[Bag, List[BagQuantity]]:
-    """Transforms a list of bag descriptions into a dictionary structure"""
-    bag_structure = dict()
-    for line in data:
-        bag, bags = get_bag_with_content_and_count(line)
-        bag_structure[bag] = bags
+class Bags:
+    """Counts the bags inside the `wanted_bag`"""
 
-    return bag_structure
+    def __init__(self, data: List[str]):
+        self.bags = {
+            get_primary_bag(line): get_secondary_bags_with_count(line) for line in data
+        }
+        self._count = 0
+
+    def count_bags_inside(self, bag: Bag) -> int:
+        self._count = 0
+        self._count_bags_inside(bag, 1)
+
+        return self._count
+
+    def _count_bags_inside(self, bag: Bag, factor: int):
+        """Counts recursively the number of bags"""
+        for bags_count in self.bags[bag]:
+            bags_count: BagQuantity
+            self._count += bags_count.count * factor
+            self._count_bags_inside(bags_count.bag, bags_count.count * factor)
 
 
 def part_1(data: List[str]):
-    """Executes pa"""
+    """Executes part 1 of day 7"""
+    print("#" * 16 + " Part 1 " + "#" * 17)
 
     bags = {get_primary_bag(line): get_secondary_bags(line) for line in data}
 
@@ -75,13 +88,25 @@ def part_1(data: List[str]):
 
         iteration += 1
         print(
-            f"Iteration {str(iteration).zfill(2)}: Suitable bags found -> {str(len(has_wanted_bag)).zfill(3)}"
+            f"Iteration {str(iteration).zfill(1)}: Suitable bags found -> {str(len(has_wanted_bag)).zfill(3)} #"
         )
 
         if len(has_wanted_bag) == len_before_iteration:
+            print("#" * 41)
             break
+
+
+def part_2(data: List[str]):
+    """Executes part 2 of day 7"""
+    print("\n" + "#" * 16 + " Part 2 " + "#" * 17)
+    wanted_bag = Bag("shiny gold")
+    bags = Bags(data)
+    count = bags.count_bags_inside(wanted_bag)
+    print(wanted_bag.description + " has " + str(count) + " other bags inside.  #")
+    print("#" * 41)
 
 
 if __name__ == "__main__":
     _data = get_day(7).read_text().splitlines()
     part_1(_data)
+    part_2(_data)
