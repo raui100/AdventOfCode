@@ -1,6 +1,4 @@
-from pytest import fixture
-
-from src.day12 import Direction, Movement, Ship
+from src.day12 import Direction, Movement, Ship, Waypoint, Navigator
 
 
 def get_ship() -> Ship:
@@ -50,3 +48,43 @@ def test_ship():
     ship.move("L90")  # Ship looks EAST
     ship.move("F90")
     assert ship.north == 0 and ship.east == 0
+
+
+def test_waypoint():
+    wp = Waypoint()
+    assert wp.north == 1
+    assert wp.east == 10
+
+    wp.rotate(90)
+    assert wp.north == -10 and wp.east == 1
+
+    wp.rotate(180)
+    assert wp.north == 10 and wp.east == -1
+
+    wp.rotate(270)
+    assert wp.north == -1 and wp.east == -10
+
+
+def test_navigator():
+    nav = Navigator()
+    assert nav.determine_manhattan_distance() == 0
+
+    nav.move("N10")
+    assert nav.north == 0 and nav.east == 0
+    assert nav.waypoint.north == 11 and nav.waypoint.east == 10
+
+    nav.move("E10")
+    assert nav.north == 0 and nav.east == 0
+    assert nav.waypoint.north == 11 and nav.waypoint.east == 20
+
+    nav.move("S10")
+    assert nav.north == 0 and nav.east == 0
+    assert nav.waypoint.north == 1 and nav.waypoint.east == 20
+
+    nav.move("W10")
+    assert nav.north == 0 and nav.east == 0
+    assert nav.waypoint.north == 1 and nav.waypoint.east == 10
+
+    nav.move("F10")
+    assert nav.north == 10 and nav.east == 100
+    assert nav.waypoint.north == 1 and nav.waypoint.east == 10
