@@ -1,7 +1,7 @@
 """Conways Game of Life"""
-from enum import Enum
+from enum import Enum, auto
 from pathlib import Path
-from typing import List
+from typing import List, Generator
 
 
 class Seat(Enum):
@@ -10,55 +10,46 @@ class Seat(Enum):
     EMPTY = "L"
     FLOOR = "."
     OCCUPIED = "#"
+    BORDER = " "
 
 
 class GameOfLife:
     """Models Conways Game of life"""
+
+    DIRECTIONS = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
 
     def __init__(self, path: Path):
         data = path.read_text().splitlines()
         self.data: str = "".join(data)
         self.width = len(data[0])  # Determines width of the field
 
-    def is_in_boundary(self, index):
-        """Checks if an index is within the boundary of the array"""
-        return 0 <= index < len(self.data)
+    def get_seat_by_direction(self, index: int, direction: str) -> str:
+        index += -self.width if "N" in direction else 0
+        index += +1 if "E" in direction else 0
+        index += +self.width if "S" in direction else 0
+        index += -1 if "W" in direction else 0
 
-    def get_adjacent_indices(self, index) -> List[int]:
-        """Determines the indices that are adjacent to a certain index"""
-        indices = [  # All 8 adjacent positions around the index
-            index - self.width - 1,  # Upper left corner
-            index - self.width + 0,  # Upper center
-            index - self.width + 1,  # Upper right corner
-            index - 1,  # Left
-            index + 1,  # Right
-            index + self.width - 1,  # Lower left corner
-            index + self.width + 0,  # Lower center
-            index + self.width + 1,  # Lower right corner
-        ]
+        if (
+            index < 0  # Exceeded Northern Border
+            or index >= len(self.data)  # South
+            or ("W" in direction and index % self.width == self.width - 1)  # East
+            or ("E" in direction and index % self.width == 0)  # West
+        ):  # Exceeded upper or lower border
+            return Seat.BORDER.value
 
-        if index % self.width == 0:  # The seat is on the left hand side of the field
-            indices[0], indices[3], indices[5] = -1, -1, -1  # These values are filtered later on
+        if self.data[index] == Seat.FLOOR.value:
 
-        if index % self.width == self.width - 1:  # Right hand side of the field
-            indices[2], indices[4], indices[7] = -1, -1, -1  # These values are filtered later on
+            return self.get_seat_by_direction(index, direction)
 
-        if index < self.width:  # First Row
-            indices[0], indices[1], indices[2] = -1, -1, -1  # These values are filtered later on
+        else:
 
-        if index >= len(self.data) - self.width:  # Last row
-            indices[5], indices[6], indices[7] = -1, -1, -1  # These values are filtered later on
-
-        # Filters indices that don't exist. E.g: There is no row above the first row
-        indices = [index for index in indices if self.is_in_boundary(index)]
-
-        return indices
+            return self.data[index]
 
     def count_occupied_adjacent(self, index: int) -> int:
         """Counts the number of adjacent positions that are occupied"""
         count = 0
-        for ind in self.get_adjacent_indices(index):
-            if self.data[ind] == Seat.OCCUPIED.value:
+        for direction in self.DIRECTIONS:
+            if self.get_seat_by_direction(index, direction) == Seat.OCCUPIED.value:
                 count += 1
 
         return count
@@ -77,7 +68,7 @@ class GameOfLife:
 
             # An occupied field with 4 or more adjacent occupied fields becomes empty
             elif (
-                char == Seat.OCCUPIED.value and self.count_occupied_adjacent(index) >= 4
+                char == Seat.OCCUPIED.value and self.count_occupied_adjacent(index) >= 5
             ):
                 new_data += Seat.EMPTY.value
 
