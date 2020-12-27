@@ -1,7 +1,6 @@
 """Conways Game of Life"""
-from enum import Enum, auto
+from enum import Enum
 from pathlib import Path
-from typing import List, Generator
 
 
 class Seat(Enum):
@@ -34,7 +33,7 @@ class GameOfLife:
             or index >= len(self.data)  # South
             or ("W" in direction and index % self.width == self.width - 1)  # East
             or ("E" in direction and index % self.width == 0)  # West
-        ):  # Exceeded upper or lower border
+        ):
             return Seat.BORDER.value
 
         if self.data[index] == Seat.FLOOR.value:
