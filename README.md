@@ -93,8 +93,30 @@ def intersecting_entries(group: str) -> int:
   ```
 </details>
 
+## Day 7
+**Must read**  
+├[Recursion & Iteration](https://www.refactoring.com/catalog/replaceRecursionWithIteration.html)  
+└[PyTest](https://www.youtube.com/watch?v=fv259R38gqc)
+
+## Day 8
+**Must read**  
+├[Generatoren](https://realpython.com/introduction-to-python-generators/)  
+└[Generators will free your mind](https://www.youtube.com/watch?v=RdhoN4VVqq8)
+
+## Day 11
+> Nothing new here. 
+>I have used a string as an array of chars and I'm accessing them via smart usage of modulo
+
+## Day 12
+> I had solved part 1 and instead of adapting the class `Ship` I've implented an Adapter class
+> with the name `Navigator`
+
+**Must read**  
+├[PyTest](https://www.youtube.com/watch?v=fv259R38gqc)  
+└[Adapter design pattern](https://refactoring.guru/design-patterns/adapter/python/example)
 
 <!-- Design element
+## Day 
 **Must read** 
 ├[]()
 └[]()
