@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.day11 import GameOfLife, Seat
+from ..day11 import GameOfLife, Seat
 from pytest import fixture
 
 

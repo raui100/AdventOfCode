@@ -1,4 +1,4 @@
-from src.day12 import Direction, Movement, Ship, Waypoint, Navigator
+from ..day12 import Direction, Movement, Ship, Waypoint, Navigator
 
 
 def get_ship() -> Ship:

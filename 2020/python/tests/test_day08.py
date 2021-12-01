@@ -4,7 +4,7 @@ import pytest
 from pytest import fixture
 
 
-from src.day08 import (
+from ..day08 import (
     Operation,
     Instruction,
     parse_instruction,

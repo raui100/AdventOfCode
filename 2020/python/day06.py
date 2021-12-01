@@ -1,6 +1,6 @@
 from typing import List, Set
 
-from lib.paths import get_day
+from .lib.paths import get_day
 import re
 
 

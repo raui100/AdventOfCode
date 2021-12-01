@@ -1,7 +1,7 @@
 """Solves day 7 puzzle"""
 import re
 from typing import NamedTuple, List, Tuple, Dict
-from lib.paths import get_day
+from .lib.paths import get_day
 
 
 class Bag(NamedTuple):

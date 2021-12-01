@@ -1,7 +1,7 @@
 from itertools import combinations_with_replacement
 from math import prod
 
-from lib.paths import get_day
+from .lib.paths import get_day
 
 
 def iter_list(number_of_entries: int) -> int:

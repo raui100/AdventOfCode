@@ -1,4 +1,4 @@
-from lib.paths import get_day
+from .lib.paths import get_day
 from math import prod
 
 if __name__ == "__main__":

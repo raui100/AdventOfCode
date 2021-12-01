@@ -1,6 +1,6 @@
 from contextlib import suppress
 
-from lib.paths import get_day
+from .lib.paths import get_day
 import re
 
 

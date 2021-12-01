@@ -1,6 +1,6 @@
 from typing import List
 
-from src.day07 import (
+from ..day07 import (
     Bag,
     Bags,
     BagQuantity,

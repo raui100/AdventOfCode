@@ -1,6 +1,6 @@
 from typing import List
 
-from lib.paths import get_day
+from .lib.paths import get_day
 import re
 
 
