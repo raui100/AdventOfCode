@@ -22,6 +22,7 @@ class Command:
         self.direction: Direction = Direction(direction)
         self.distance: int = int(distance)
 
+
 @dataclass
 class Position:
     x_pos: int = 0
@@ -35,14 +36,13 @@ class Position:
         match command.direction:
             case Direction.DOWN:
                 self.aim += command.distance
-            
-            case Direction.UP: 
+
+            case Direction.UP:
                 self.aim -= command.distance
 
             case Direction.FORWARD:
                 self.x_pos += command.distance
                 self.y_pos += command.distance * self.aim
-    
 
 
 def solve_part_a():
