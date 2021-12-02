@@ -1,3 +1,5 @@
+"""Solves day 01 of advent of code"""
+
 from lib import input_to_list_int
 
 def count_increases(numbers) -> int:
