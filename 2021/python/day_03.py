@@ -1,7 +1,6 @@
 """Solves day 03 of advent of code"""
-from collections import Counter
-
 from lib import input_to_list_str
+
 
 def solve_part_a():
     """Solves the first halve of the puzzle"""
@@ -17,7 +16,7 @@ def solve_part_a():
             if number == "1":
                 counter[index] += 1
 
-    # Calculating epsilon and gamma 
+    # Calculating epsilon and gamma
     epsilon = ["1" if value * 2 > LEN_INPUT else "0" for value in counter.values()]
     epsilon = int("".join(epsilon), 2)
     gamma = int("1" * LEN_ROW, 2) - epsilon
