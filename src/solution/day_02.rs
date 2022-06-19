@@ -51,4 +51,23 @@ impl Solution for Day {
         (horizontal * depth).to_string()
     }
 
+    fn part_b(&self) -> String {
+        let commands = self.data.lines().map(|l| l.parse::<Command>().ok().unwrap()).collect::<Vec<Command>>();
+        let mut horizontal = 0_u32;
+        let mut depth = 0_u32;
+        let mut aim = 0_i32;
+        for command in commands.iter() {
+            match command {
+                Command::Forward(n) => {
+                    horizontal += *n as u32;
+                    depth += (*n as i32 * aim) as u32;
+                },
+                Command::Down(n) => aim += *n as i32,
+                Command::Up(n) => aim -= *n as i32,
+
+            }
+        }
+        (horizontal * depth).to_string()
+    }
+
 }
