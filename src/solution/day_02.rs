@@ -1,27 +1,54 @@
+use std::str::FromStr;
 use crate::common::Solution;
 
 const DATA: &str = include_str!("./data/2");
-const NAME: &str = "Sonar Sweep";
 
-pub struct Day01 {}
-
-impl Day01 {
-    fn get_numbers() -> Vec<u32> {
-        DATA.lines().map(|l| l.parse::<u32>().expect(format!("Failed parsing {l} to u32").as_str())).collect()
+pub struct Day {
+    data: String
+}
+impl Day {
+    pub fn new() -> Day {
+        Day {data: DATA.to_string()}
     }
 }
-impl Solution for Day01 {
-    fn name(&self) -> &'static str { NAME }
+enum Command {
+    Forward(u8),
+    Down(u8),
+    Up(u8)
+}
+
+impl FromStr for Command {
+    type Err = ();
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let command: Vec<&str> = s.split_ascii_whitespace().collect();
+        assert_eq!(&command.len(), &2, "Expected a command similar to this: 'forward 5'");
+        let steps: u8 = command[1].parse().unwrap();
+        match command[0] {
+            "forward" => Ok(Command::Forward(steps)),
+            "down" => Ok(Command::Down(steps)),
+            "up" => Ok(Command::Up(steps)),
+            _ => Err(())
+        }
+    }
+}
+
+impl Solution for Day {
+    fn name(&self) -> &'static str { "Dive!" }
 
     fn part_a(&self) -> String {
-        let numbers = Day01::get_numbers();
-        let increases = numbers.windows(2).filter(|numbers| numbers[0] < numbers[1]).count();
-        increases.to_string()
+        let commands = self.data.lines().map(|l| l.parse::<Command>().ok().unwrap()).collect::<Vec<Command>>();
+        let mut horizontal = 0_u32;
+        let mut depth = 0_u32;
+        for command in commands.iter() {
+            match command {
+                Command::Forward(n) => horizontal += *n as u32,
+                Command::Down(n) => depth += *n as u32,
+                Command::Up(n) => depth -= *n as u32,
+
+            }
+        }
+        (horizontal * depth).to_string()
     }
 
-    fn part_b(&self) -> String {
-        let numbers = Day01::get_numbers();
-        let increases = numbers.windows(4).filter(|numbers| numbers[0] < numbers[3]).count();
-        increases.to_string()
-    }
 }

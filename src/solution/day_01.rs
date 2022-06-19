@@ -2,22 +2,22 @@ use crate::common::Solution;
 
 pub const DATA: &str = include_str!("./data/1");
 
-pub struct Day01 {
+pub struct Day {
     pub data: String
 }
 
-impl Day01 {
-    pub fn new() -> Day01 {
-        Day01 {data: DATA.to_string()}
+impl Day {
+    pub fn new() -> Day {
+        Day {data: DATA.to_string()}
     }
 }
 
-impl Day01 {
+impl Day {
     fn get_numbers(&self) -> Vec<u32> {
         self.data.lines().map(|l| l.parse::<u32>().expect(format!("Failed parsing {l} to u32").as_str())).collect()
     }
 }
-impl Solution for Day01 {
+impl Solution for Day {
     fn name(&self) -> &'static str { "Sonar Sweep" }
 
     fn part_a(&self) -> String {
