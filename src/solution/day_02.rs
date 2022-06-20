@@ -36,7 +36,7 @@ impl FromStr for Command {
 impl Solution for Day {
     fn name(&self) -> &'static str { "Dive!" }
 
-    fn part_a(&self) -> String {
+    fn part_a(&self) -> Option<String> {
         let commands = self.data.lines().map(|l| l.parse::<Command>().ok().unwrap()).collect::<Vec<Command>>();
         let mut horizontal = 0_u32;
         let mut depth = 0_u32;
@@ -48,10 +48,10 @@ impl Solution for Day {
 
             }
         }
-        (horizontal * depth).to_string()
+        Some((horizontal * depth).to_string())
     }
 
-    fn part_b(&self) -> String {
+    fn part_b(&self) -> Option<String> {
         let commands = self.data.lines().map(|l| l.parse::<Command>().ok().unwrap()).collect::<Vec<Command>>();
         let mut horizontal = 0_u32;
         let mut depth = 0_u32;
@@ -67,7 +67,7 @@ impl Solution for Day {
 
             }
         }
-        (horizontal * depth).to_string()
+        Some((horizontal * depth).to_string())
     }
 
 }

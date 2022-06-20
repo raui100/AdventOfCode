@@ -20,16 +20,15 @@ impl Day {
 impl Solution for Day {
     fn name(&self) -> &'static str { "Sonar Sweep" }
 
-    fn part_a(&self) -> String {
+    fn part_a(&self) -> Option<String> {
         let numbers = self.get_numbers();
         let increases = numbers.windows(2).filter(|numbers| numbers[0] < numbers[1]).count();
-        increases.to_string()
+        Some(increases.to_string())
     }
 
-    fn part_b(&self) -> String {
+    fn part_b(&self) -> Option<String> {
         let numbers = self.get_numbers();
         let increases = numbers.windows(4).filter(|numbers| numbers[0] < numbers[3]).count();
-        increases.to_string()
-
+        Some(increases.to_string())
     }
 }
