@@ -14,12 +14,15 @@ fn main() {
         _ => panic!("Unknown arguments")
     };
 
-    let mut out: String = String::new();
     if day == Day(0) || day == Day(1) {
-        out.push_str(&*solution::day_01::Day::new().solution());
+        println!("{}", &*solution::day_01::Day::new().solution());
     }
     if day == Day(0) || day == Day(2) {
-        out.push_str(&*solution::day_02::Day::new().solution());
+        println!("{}", &*solution::day_02::Day::new().solution());
     }
-    println!("{out}")
+
+    if day == Day(0) || day == Day(3) {
+        println!("{}", &*solution::day_03::Day::new().solution());
+    }
+
 }
