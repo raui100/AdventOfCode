@@ -18,7 +18,7 @@ impl Day {
     }
 }
 impl Solution for Day {
-    fn name(&self) -> &'static str { "Sonar Sweep" }
+    fn name(&self) -> &'static str { "Day 1: Sonar Sweep" }
 
     fn part_a(&self) -> Option<String> {
         let numbers = self.get_numbers();

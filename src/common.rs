@@ -1,5 +1,5 @@
-#[derive(Debug, PartialEq)]
-pub struct Day(pub u8);
+use std::collections::HashMap;
+use std::hash::Hash;
 
 pub trait Solution {
     fn name(&self) -> &'static str;
@@ -31,4 +31,26 @@ pub fn bin_to_int(vec: Vec<u8>) -> u32 {
     debug_assert!(vec.clone().iter().all(|n| *n == 0 || *n == 1));
     // Computes the binary number to an u32 by using bit shifting
     vec.into_iter().fold(0_u32, |sum, n| (sum << 1) + n as u32 )
+}
+
+
+/// Counts the number of occurrences of each entry in the iterator
+///
+/// # Examples
+/// ```
+/// let input = "aab";
+/// let result = HashMap::from([('a', 2), ('b', 1)]);
+/// assert_eq!(result, count_frequency(&input.chars()))
+/// ```
+pub fn count_frequency<I, K>(iter: I) -> HashMap<K, usize>
+    where
+        I: IntoIterator<Item=K>,
+        K: Eq + Hash,
+{
+    let mut frequency: HashMap<K, usize> = HashMap::new();
+    for item in iter {
+        *frequency.entry(item).or_insert(0) += 1;
+    }
+
+    frequency
 }

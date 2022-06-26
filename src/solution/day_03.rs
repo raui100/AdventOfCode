@@ -27,7 +27,7 @@ fn parse_and_transpose(s: &str) -> Vec<Vec<u8>> {
 }
 
 impl Solution for Day {
-    fn name(&self) -> &'static str { "Binary Diagnostic!" }
+    fn name(&self) -> &'static str { "Day 3: Binary Diagnostic!" }
 
     fn part_a(&self) -> Option<String> {
         let trans_data = parse_and_transpose(self.data.as_ref());

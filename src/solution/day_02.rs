@@ -34,7 +34,7 @@ impl FromStr for Command {
 }
 
 impl Solution for Day {
-    fn name(&self) -> &'static str { "Dive!" }
+    fn name(&self) -> &'static str { "Day 2: Dive!" }
 
     fn part_a(&self) -> Option<String> {
         let commands = self.data.lines().map(|l| l.parse::<Command>().ok().unwrap()).collect::<Vec<Command>>();
