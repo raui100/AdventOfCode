@@ -20,12 +20,12 @@ impl Solution for Day {
     }
 
     fn part_a(&self) -> Option<String> {
-        let (_pos, cost) = self.swarm.calc_optimal_position_a();
+        let (_pos, cost) = self.swarm.calc_optimal_position(Swarm::calc_total_distance_to_x);
         Some(format!("{}", cost))
     }
 
     fn part_b(&self) -> Option<String> {
-        let (_pos, cost) = self.swarm.calc_optimal_position_b();
+        let (_pos, cost) = self.swarm.calc_optimal_position(Swarm::calc_total_fuel_to_x);
         Some(format!("{}", cost))
     }
 }
@@ -74,31 +74,16 @@ impl Swarm {
     }
 
     /// Determines the x-position that has the minimum total distance of the swarm (Part: A)
-    fn calc_optimal_position_a(&self) -> (u32, u32) {
-        let mut optimum: (u32, u32) = (0, self.calc_total_distance_to_x(0));
+    fn calc_optimal_position<F>(&self, func: F) -> (u32, u32)
+        where F: Fn(&Self, u32) -> u32
+    {
+        let mut optimum: (u32, u32) = (0, func(self, 0));
         let max_pos: u32 = self.crabs.iter().max().unwrap().clone();
         for position in 1..=max_pos {
-            let dist = self.calc_total_distance_to_x(position);
+            let dist = func(self, position);
             if dist <= optimum.1 {
                 optimum = (position, dist)
             } else {  // There is only one single global minimum
-                break;
-            }
-        }
-
-        optimum
-    }
-
-    /// Determines the x-position that has the minimum fuel consomption for the swarm (Part: B)
-    fn calc_optimal_position_b(&self) -> (u32, u32) {
-        let mut optimum: (u32, u32) = (0, self.calc_total_fuel_to_x(0));
-        let max_pos: u32 = self.crabs.iter().max().unwrap().clone();
-        for position in 1..=max_pos {
-            let dist = self.calc_total_fuel_to_x(position);
-            if dist <= optimum.1 {
-                optimum = (position, dist)
-            }
-            else {  // There is only one single global minimum
                 break;
             }
         }
@@ -135,8 +120,14 @@ mod test {
     }
 
     #[test]
-    fn calc_optimal_position() {
+    fn calc_optimal_position_part_a() {
         let swarm = Swarm::new(DATA);
-        assert_eq!(swarm.calc_optimal_position_a(), (2, 37));
+        assert_eq!(swarm.calc_optimal_position(Swarm::calc_total_distance_to_x), (2, 37));
+    }
+
+    #[test]
+    fn calc_optimal_position_part_b() {
+        let swarm = Swarm::new(DATA);
+        assert_eq!(swarm.calc_optimal_position(Swarm::calc_total_fuel_to_x), (5, 168));
     }
 }
