@@ -1,6 +1,3 @@
-use regex::Regex;
-
-use crate::common::count_frequency;
 use crate::Solution;
 
 const DATA: &str = include_str!("./data/5");
@@ -88,19 +85,18 @@ impl Line {
         };
     }
 
-    fn from_str(s: &str, re: &Regex) -> Line {
-        for matches in re.captures_iter(s) {
-            return Line(
-                Point {
-                    x: matches[1].parse::<i32>().expect(&format!("Failed parsing: {}", &matches[0])),
-                    y: matches[2].parse::<i32>().expect(&format!("Failed parsing: {}", &matches[0])),
-                },
-                Point {
-                    x: matches[3].parse::<i32>().expect(&format!("Failed parsing: {}", &matches[0])),
-                    y: matches[4].parse::<i32>().expect(&format!("Failed parsing: {}", &matches[0])),
-                });
-        }
-        panic!("Failed matching: {}", s)
+    fn from_str(s: &str) -> Line {
+        let numbers: Vec<i32> = s.split(",").map(|n|
+            {
+                n.parse::<i32>().expect(&format!("Failed parsing: {}", n))
+            })
+            .collect();
+
+        debug_assert_eq!(numbers.len(), 4);
+        Line(
+            Point { x: numbers[0], y: numbers[1] },
+            Point { x: numbers[2], y: numbers[3] },
+        )
     }
 }
 
@@ -110,21 +106,25 @@ pub(crate) struct Day {
 
 impl Day {
     fn parse_data(s: &str) -> Day {
-        let re = Regex::new(r"^(\d+),(\d+) -> (\d+),(\d+)").unwrap();
-        let lines: Vec<Line> = s.lines().map(|row| Line::from_str(row, &re)).collect();
+        let data = s.replace(" -> ", ",");
+        let lines: Vec<Line> = data.lines().map(|row| Line::from_str(row)).collect();
 
         Day { lines }
     }
 
     fn count_overlapping_points(&self, use_diag: bool) -> usize {
+        let points: Vec<Point> = self.lines.iter()
+            .map(|l| l.extend(use_diag))
+            .flatten()
+            .collect();
 
-        let points: Vec<Point> = self.lines.iter().map(|l| {
-            let p = l.extend(use_diag);
-            // dbg!(&p);
-            p
-        }).flatten().collect();
-        let map = count_frequency(points);
-        let count = map.values().filter(|v| **v >= 2).count();
+        let max_x = points.iter().fold(0, |init, item| i32::max(init, item.x));
+        let max_y = points.iter().fold(0, |init, item| i32::max(init, item.y));
+        let mut grid = vec![vec![0; 1 + max_x as usize]; 1 + max_y as usize];
+        for point in &points {
+            grid[point.y as usize][point.x as usize] += 1;
+        }
+        let count = grid.iter().flatten().filter(|v| **v >= 2).count();
 
         count
     }
@@ -148,8 +148,7 @@ impl Solution for Day {
 
 #[cfg(test)]
 mod tests {
-    use regex::Regex;
-    use crate::solution::day_05::{Day, Line, Point};
+    use super::*;
 
     const TEST_DATA: &str = "0,9 -> 5,9
 8,0 -> 0,8
@@ -166,24 +165,24 @@ mod tests {
     #[test]
     /// Parses a single row of the input
     fn test_line_from_str() {
-        let re = Regex::new(r"^(\d+),(\d+) -> (\d+),(\d+)").unwrap();
+        let s = "0,9,5,9";
         let line = Line(Point { x: 0, y: 9 }, Point { x: 5, y: 9 });
-        assert_eq!(Line::from_str(TEST_DATA.lines().next().unwrap(), &re), line);
+        assert_eq!(Line::from_str(s), line);
     }
 
     #[test]
     /// Extends a single point
     fn test_point_extend() {
-        let p = Point {x: 0, y: 0};
+        let p = Point { x: 0, y: 0 };
         // Extending vertically
         let vec_x: Vec<(i32, i32)> = vec![(0, 0), (1, 0)];
-        assert_eq!(p.extend(vec_x), vec![Point {x: 0, y: 0}, Point {x: 1, y: 0}]);
+        assert_eq!(p.extend(vec_x), vec![Point { x: 0, y: 0 }, Point { x: 1, y: 0 }]);
         // Extending horizontally
         let vec_x: Vec<(i32, i32)> = vec![(0, 0), (0, 1)];
-        assert_eq!(p.extend(vec_x), vec![Point {x: 0, y: 0}, Point {x: 0, y: 1}]);
+        assert_eq!(p.extend(vec_x), vec![Point { x: 0, y: 0 }, Point { x: 0, y: 1 }]);
         // Extending diagonally
         let vec_x: Vec<(i32, i32)> = vec![(0, 0), (1, 1)];
-        assert_eq!(p.extend(vec_x), vec![Point {x: 0, y: 0}, Point {x: 1, y: 1}]);
+        assert_eq!(p.extend(vec_x), vec![Point { x: 0, y: 0 }, Point { x: 1, y: 1 }]);
     }
 
     #[test]
@@ -206,5 +205,4 @@ mod tests {
         let count = day.count_overlapping_points(true);
         assert_eq!(count, 12);
     }
-
 }

@@ -240,7 +240,7 @@ mod tests {
     #[test]
     fn test_play() {
         let mut game = Game::parse_input(TEST_DATA);
-        assert_eq!(game.play()[0], Some("4512".to_string()))
+        assert_eq!(game.play()[0], "4512".to_string())
     }
 }
 
