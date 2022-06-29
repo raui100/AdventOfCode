@@ -17,23 +17,23 @@ I've linked a lot of resources to solve the different days
 ]
 
 [Python](https://github.com/raui100/AdventOfCode/tree/master/2021/python) solutions: [
-[1](https://github.com/raui100/AdventOfCode/blob/master/2021/pyton/src/day_01.py), 
-[2](https://github.com/raui100/AdventOfCode/blob/master/2021/pyton/src/day_02.py), 
-[3](https://github.com/raui100/AdventOfCode/blob/master/2021/pyton/src/day_03.py), 
-[15](https://github.com/raui100/AdventOfCode/blob/master/2021/pyton/src/day_15.py), 
+[1](https://github.com/raui100/AdventOfCode/blob/master/2021/python/src/day_01.py), 
+[2](https://github.com/raui100/AdventOfCode/blob/master/2021/python/src/day_02.py), 
+[3](https://github.com/raui100/AdventOfCode/blob/master/2021/python/src/day_03.py), 
+[15](https://github.com/raui100/AdventOfCode/blob/master/2021/python/src/day_15.py), 
 ]
 
 ## [2020](https://adventofcode.com/2020)
 [Python](https://github.com/raui100/AdventOfCode/tree/master/2021/python) solutions: [
-[1](https://github.com/raui100/AdventOfCode/blob/master/2020/pyton/day_01.py),
-[2](https://github.com/raui100/AdventOfCode/blob/master/2020/pyton/day_02.py),
-[3](https://github.com/raui100/AdventOfCode/blob/master/2020/pyton/day_03.py),
-[4](https://github.com/raui100/AdventOfCode/blob/master/2020/pyton/day_04.py),
-[5](https://github.com/raui100/AdventOfCode/blob/master/2020/pyton/day_05.py),
-[6](https://github.com/raui100/AdventOfCode/blob/master/2020/pyton/day_06.py),
-[7](https://github.com/raui100/AdventOfCode/blob/master/2020/pyton/day_07.py),
-[8](https://github.com/raui100/AdventOfCode/blob/master/2020/pyton/day_08.py),
-[11](https://github.com/raui100/AdventOfCode/blob/master/2020/pyton/day_11.py),
-[12](https://github.com/raui100/AdventOfCode/blob/master/2020/pyton/day_12.py),
-[15](https://github.com/raui100/AdventOfCode/blob/master/2020/pyton/day_15.py),
+[1](https://github.com/raui100/AdventOfCode/blob/master/2020/python/day_01.py),
+[2](https://github.com/raui100/AdventOfCode/blob/master/2020/python/day_02.py),
+[3](https://github.com/raui100/AdventOfCode/blob/master/2020/python/day_03.py),
+[4](https://github.com/raui100/AdventOfCode/blob/master/2020/python/day_04.py),
+[5](https://github.com/raui100/AdventOfCode/blob/master/2020/python/day_05.py),
+[6](https://github.com/raui100/AdventOfCode/blob/master/2020/python/day_06.py),
+[7](https://github.com/raui100/AdventOfCode/blob/master/2020/python/day_07.py),
+[8](https://github.com/raui100/AdventOfCode/blob/master/2020/python/day_08.py),
+[11](https://github.com/raui100/AdventOfCode/blob/master/2020/python/day_11.py),
+[12](https://github.com/raui100/AdventOfCode/blob/master/2020/python/day_12.py),
+[15](https://github.com/raui100/AdventOfCode/blob/master/2020/python/day_15.py),
 ]
