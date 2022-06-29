@@ -1,4 +1,5 @@
+**/target
 .idea
-venv
+**/aoc.iml
 **.pytest_cache
 **/__pycache__

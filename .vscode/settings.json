@@ -1,5 +1,0 @@
-{
-    "python.formatting.provider": "black",
-    "python.pythonPath": "/bin/python3.10",
-    "python.languageServer": "Pylance"
-}
