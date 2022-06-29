@@ -41,6 +41,10 @@ fn main() {
     if day == ArgDay(0) || day == ArgDay(6) {
         println!("{}", &*solution::day_06::Day::new().solution());
     }
+    // Day 7
+    if day == ArgDay(0) || day == ArgDay(7) {
+        println!("{}", &*solution::day_07::Day::new().solution());
+    }
 
 
 }
