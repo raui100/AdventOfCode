@@ -1,31 +1,17 @@
-use std::num::ParseIntError;
+use itertools::Itertools;
 use crate::common::solution::Solution;
+use crate::common::io::read_day;
 
 pub struct Day {
-    data: Vec<i32>,
+    data: Vec<usize>,
 }
 
 impl Day {
     pub fn new() -> Self {
-        let mut data: Vec<i32> = Vec::new();
-        let mut current = 0;
-        let mut num: Result<i32, ParseIntError> = Ok(0);  // Init with 0
-        for line in crate::common::io::read_day(1).unwrap().lines() {
-            num = line.parse::<i32>();
-            {
-                match num {
-                    Ok(num) => current += num,
-                    Err(_) => {
-                        data.push(current);
-                        current = 0;
-                    }
-                }
-            }
-        }
-        if num.is_ok() {  // The last number has to be pushed to the Vec
-            data.push(current)
-        }
-        data.sort_by(|a, b| b.cmp(a));  // Reverse sorting
+        let data: Vec<usize> = read_day(1).unwrap().split("\n\n")
+            .map(|group| group.lines().map(|l| l.parse::<usize>().unwrap()).sum())
+            .sorted_unstable_by_key(|&num| std::cmp::Reverse(num))  // Descending
+            .collect();
 
         Day { data }
     }
@@ -40,7 +26,7 @@ impl Solution for Day {
     }
 
     fn part_b(&self) -> Option<String> {
-        Some(self.data[..3].iter().sum::<i32>().to_string())  // 215594
+        Some(self.data[..3].iter().sum::<usize>().to_string())  // 215594
     }
 
 }
