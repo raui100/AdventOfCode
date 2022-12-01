@@ -23,5 +23,5 @@ class Solution(SolutionABC):
     def _part_b(self) -> str:
         highest_three: int = sum(self._sorted_and_summed_numbers[-3:])  # Sum of three highest numbers
 
-        return str(highest_three)
+        return str(highest_three)  # 215594
 

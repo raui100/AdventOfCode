@@ -5,6 +5,16 @@ If you're interested in learning Python check out my [solutions](https://github.
 I've linked a lot of resources to solve the different days
 
 
+## [2022](https://adventofcode.com/2022)
+[Rust](https://github.com/raui100/AdventOfCode/tree/master/2022/rust) solutions: [
+[1](https://github.com/raui100/AdventOfCode/blob/master/2022/rust/src/solution/day_01.rs),
+]
+
+[Python](https://github.com/raui100/AdventOfCode/tree/master/2022/python) solutions: [
+[1](https://github.com/raui100/AdventOfCode/blob/master/2022/python/src/solutions/day_01.py),
+]
+
+
 ## [2021](https://adventofcode.com/2021)
 [Rust](https://github.com/raui100/AdventOfCode/tree/master/2021/rust) solutions: [
 [1](https://github.com/raui100/AdventOfCode/blob/master/2021/rust/src/solution/day_01.rs), 
