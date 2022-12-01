@@ -1,8 +1,6 @@
 from functools import cached_property
-from typing import Optional
 
-from src.lib.parsing import input_to_int
-from src.lib.calc import sum_numbers
+from src.lib.parsing import read_text
 from src.lib.solution import SolutionABC
 
 
@@ -10,10 +8,11 @@ class Solution(SolutionABC):
 
     @cached_property
     def _sorted_and_summed_numbers(self) -> list[int]:
-        data: list[Optional[int]] = input_to_int(self._data)
-        summed: list[int] = sorted(sum_numbers(data))
+        numbers: list[int] = []
+        for group in read_text(1).split("\n\n"):
+            numbers.append(sum([int(num) for num in group.splitlines()]))
 
-        return sorted(summed)
+        return sorted(numbers)
 
     def _part_a(self) -> str:
         highest: int = self._sorted_and_summed_numbers[-1]  # Highest number

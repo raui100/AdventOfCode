@@ -1,5 +1,4 @@
 from abc import ABC
-from functools import cached_property
 
 from src.lib.parsing import read_text
 

@@ -1,6 +1,7 @@
 use itertools::Itertools;
-use crate::common::solution::Solution;
+
 use crate::common::io::read_day;
+use crate::common::solution::Solution;
 
 pub struct Day {
     data: Vec<usize>,
@@ -28,6 +29,5 @@ impl Solution for Day {
     fn part_b(&self) -> Option<String> {
         Some(self.data[..3].iter().sum::<usize>().to_string())  // 215594
     }
-
 }
 
