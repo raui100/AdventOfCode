@@ -20,8 +20,8 @@ class Solution(SolutionABC):
         return sum([SCORE[line][part] for line in read_text(self._day).splitlines()])
 
     def _part_a(self) -> str:
-        return str(self._calc_score(part=0))  # Part A <=> 0
+        return str(self._calc_score(part=0))  # 10941
 
     def _part_b(self) -> str:
-        return str(self._calc_score(part=1))  # Part B <=> 1
+        return str(self._calc_score(part=1))  # 13071
 

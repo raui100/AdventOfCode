@@ -74,7 +74,7 @@ impl Solution for Day {
             }
         }
 
-        Some(sum.to_string())  // 13753
+        Some(sum.to_string())  // 13071
     }
 }
 
