@@ -11,8 +11,7 @@ fn main() {
 
     if !vec![0_u8].contains(&day) {panic!("Day {day} is not implemented yet")}
 
-    if day == 0 || day == 1 {
-        solution::day_01::Day::new().solution();
-    }
+    if day == 1 || day == 0 { solution::day_01::Day::new().solution(); }
+    if day == 2 || day == 0 { solution::day_02::Day::new().solution(); }
 
 }
