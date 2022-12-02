@@ -1,5 +1,5 @@
 import sys
-from src.solutions import day_01
+from src import solutions
 
 if __name__ == "__main__":
     try:
@@ -11,4 +11,7 @@ if __name__ == "__main__":
         raise NotImplementedError(f"Day {day} has not been implemented yet")
 
     if day in [0, 1]:
-        print(day_01.Solution(1).solution())
+        print(solutions.day_01.Solution(1).solution())
+
+    if day in [0, 2]:
+        print(solutions.day_02.Solution(2).solution())
