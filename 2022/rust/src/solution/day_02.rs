@@ -12,7 +12,7 @@ impl Day {
     pub fn new() -> Self {
         let data: Vec<(Abc, Xyz)> = read_day(2).unwrap().lines()
             .map(|l| {
-                let abc = match l.chars().nth(0).unwrap() {
+                let abc = match l.chars().next().unwrap() {
                     'A' => Rock,
                     'B' => Paper,
                     'C' => Scissor,
