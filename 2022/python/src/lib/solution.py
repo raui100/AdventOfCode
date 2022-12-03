@@ -39,4 +39,4 @@ class SolutionABC(ABC):
         if solution_b is not None:
             solution += f"Part B: {solution_b}\n"
 
-        return solution + "\n"  # Prepending new line
+        return solution
