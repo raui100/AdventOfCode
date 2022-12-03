@@ -1,5 +1,6 @@
 from src.lib.parsing import read_text
 from src.lib.solution import SolutionABC
+from typing import Iterable
 
 
 def char_to_num(char: str) -> int:
@@ -16,24 +17,24 @@ def test_char_to_num():
     assert char_to_num("Z") == 52
 
 
+def intersection(sets: Iterable) -> str:
+    return set.intersection(*(set(entry) for entry in sets)).pop()
+
+
+def split_in_half(string: str) -> (str, str):
+    assert string.__len__() % 2 == 0
+    return string[:len(string) // 2], string[len(string) // 2:]
+
+
 class Solution(SolutionABC):
     def _part_a(self) -> str:  # 12 minutes
-        score = 0
-        for line in read_text(3).splitlines():
-            half = len(line) // 2
-            set_1 = set(line[: half])
-            set_2 = set(line[half:])
-            double = set_1.intersection(set_2).pop()
-            score += char_to_num(double)
+        score = sum([char_to_num(intersection(split_in_half(line))) for line in read_text(3).splitlines()])
 
         return str(score)  # 7848
 
     def _part_b(self) -> str:
         txt = read_text(3).splitlines()
-        score = 0
-        for ind in range(0, len(txt), 3):
-            set_char = set(txt[ind]).intersection(set(txt[ind + 1])).intersection(set(txt[ind + 2]))
-            score += char_to_num(set_char.pop())
+        score = sum([char_to_num(intersection(txt[ind: ind + 3])) for ind in range(0, len(txt), 3)])
 
         return str(score)  # 2616
 
