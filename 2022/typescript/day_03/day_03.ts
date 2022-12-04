@@ -15,8 +15,7 @@ function part_a(line: string): number {
 			}
 		}
 	}
-	console.log("ERROR!")
-	return 0;
+	throw new Error("The input doesn't conform to the expectations")
 }
 
 function part_b(strings: [string, string, string]): number {
@@ -32,8 +31,8 @@ function part_b(strings: [string, string, string]): number {
 			
 		}
 	}
-	console.log("ERROR!")
-	return 0;
+
+	throw new Error("The input doesn't conform to the expectations")
 }
 
 var score_a = 0
@@ -49,5 +48,5 @@ text.split("\n").forEach((line, ind) => {
 	}
 });
 
-console.log(score_a)
-console.log(score_b)
+console.log(score_a)  // 7848
+console.log(score_b)  // 2616
