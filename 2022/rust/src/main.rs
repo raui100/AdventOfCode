@@ -16,5 +16,6 @@ fn main() {
     if day == 1 || day == 0 { solution::day_01::Day::new().solution(); }
     if day == 2 || day == 0 { solution::day_02::Day::new().solution(); }
     if day == 3 || day == 0 { solution::day_03::Day::new().solution(); }
+    if day == 4 || day == 0 { solution::day_04::Day::new().solution(); }
 
 }
