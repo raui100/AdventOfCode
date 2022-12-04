@@ -1,6 +1,3 @@
-use std::fs::File;
-use std::io::{BufReader, prelude::*};
-
 use crate::common::io::read_day;
 use crate::common::solution::Solution;
 use itertools::Itertools;
