@@ -13,7 +13,7 @@ impl Section {
     }
 
     fn overlap(&self, other: &Section) -> bool {
-        !(self.min > other.max || self.max < other.max)
+        !(self.min > other.max || self.max < other.min)
     }
 }
 
@@ -51,7 +51,7 @@ impl Solution for Day {
 
     fn part_b(&self) -> Option<String> {
         let score = self.data.chunks_exact(2)
-            .filter(|c| (c[0].overlap(&c[1]) || c[1].overlap(&c[0])))
+            .filter(|c| c[0].overlap(&c[1]))
             .count();
 
         Some(score.to_string())  // 843
