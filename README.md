@@ -10,18 +10,21 @@ I've linked a lot of resources to solve the different days
 [1](https://github.com/raui100/AdventOfCode/blob/master/2022/rust/src/solution/day_01.rs),
 [2](https://github.com/raui100/AdventOfCode/blob/master/2022/rust/src/solution/day_02.rs),
 [3](https://github.com/raui100/AdventOfCode/blob/master/2022/rust/src/solution/day_03.rs),
+[4](https://github.com/raui100/AdventOfCode/blob/master/2022/rust/src/solution/day_04.rs),
 ]
 
 [Python](https://github.com/raui100/AdventOfCode/tree/master/2022/python) solutions: [
 [1](https://github.com/raui100/AdventOfCode/blob/master/2022/python/src/solutions/day_01.py),
 [2](https://github.com/raui100/AdventOfCode/blob/master/2022/python/src/solutions/day_02.py),
 [3](https://github.com/raui100/AdventOfCode/blob/master/2022/python/src/solutions/day_03.py),
+[4](https://github.com/raui100/AdventOfCode/blob/master/2022/python/src/solutions/day_04.py),
 ]
 
 [TypeScript](https://github.com/raui100/AdventOfCode/tree/master/2022/typescript) solutions: [
 [1](https://github.com/raui100/AdventOfCode/blob/master/2022/typescript/day_01/day_01.ts),
 [2](https://github.com/raui100/AdventOfCode/blob/master/2022/typescript/day_02/day_02.ts),
 [3](https://github.com/raui100/AdventOfCode/blob/master/2022/typescript/day_03/day_03.ts),
+[4](https://github.com/raui100/AdventOfCode/blob/master/2022/typescript/day_04/day_04.ts),
 ]
 
 
