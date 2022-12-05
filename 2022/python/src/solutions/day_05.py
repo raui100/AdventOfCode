@@ -47,7 +47,7 @@ class Solution(SolutionABC):
         return result
 
     def _part_a(self) -> str:
-        return self.common_solve(reverse=False)
+        return self.common_solve(reverse=False)  # RLFNRTNFB
 
     def _part_b(self) -> str:
-        return self.common_solve(reverse=True)
+        return self.common_solve(reverse=True)  # MHQTLJRLB
