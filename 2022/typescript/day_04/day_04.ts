@@ -10,6 +10,7 @@ console.log(
 ); // 547
 console.log(
   numbers
-    .filter((nums) => !(nums[0] > nums[3] || nums[1] < nums[2]))
+    .filter((nums) => !(nums[0] > nums[3] || nums[1] < nums[2]))  // Possible filter
+    .filter((nums) => Math.max(nums[0], nums[2]) <= Math.min(nums[1], nums[3]))  // Alternative filter
     .length,
 ); // 843
