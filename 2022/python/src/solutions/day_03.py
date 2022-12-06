@@ -1,4 +1,3 @@
-from src.lib.parsing import read_text
 from src.lib.solution import SolutionABC
 from typing import Iterable
 
@@ -28,12 +27,12 @@ def split_in_half(string: str) -> (str, str):
 
 class Solution(SolutionABC):
     def _part_a(self) -> str:  # 12 minutes
-        score = sum([char_to_num(intersection(split_in_half(line))) for line in read_text(3).splitlines()])
+        score = sum([char_to_num(intersection(split_in_half(line))) for line in self._data.splitlines()])
 
         return str(score)  # 7848
 
     def _part_b(self) -> str:
-        txt = read_text(3).splitlines()
+        txt = self._data.splitlines()
         score = sum([char_to_num(intersection(txt[ind: ind + 3])) for ind in range(0, len(txt), 3)])
 
         return str(score)  # 2616

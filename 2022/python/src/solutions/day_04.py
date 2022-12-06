@@ -1,6 +1,5 @@
 from functools import cache
 
-from src.lib.parsing import read_text
 from src.lib.solution import SolutionABC
 from typing import NamedTuple
 
@@ -20,7 +19,7 @@ class Solution(SolutionABC):
     @cache
     def common(self) -> list[Section]:
         data: list[Section] = []
-        for line in read_text(4).splitlines():
+        for line in self._data.splitlines():
             for elf in line.split(","):
                 a, b = elf.split("-")
                 data.append(Section(min=int(a), max=int(b)))

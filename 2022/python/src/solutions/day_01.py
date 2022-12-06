@@ -1,6 +1,5 @@
 from functools import cached_property
 
-from src.lib.parsing import read_text
 from src.lib.solution import SolutionABC
 
 
@@ -9,7 +8,7 @@ class Solution(SolutionABC):
     @cached_property
     def _sorted_and_summed_numbers(self) -> list[int]:
         numbers: list[int] = []
-        for group in read_text(1).split("\n\n"):
+        for group in self._data.split("\n\n"):
             numbers.append(sum([int(num) for num in group.splitlines()]))
 
         return sorted(numbers)

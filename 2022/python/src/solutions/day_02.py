@@ -1,4 +1,3 @@
-from src.lib.parsing import read_text
 from src.lib.solution import SolutionABC
 
 
@@ -17,7 +16,7 @@ SCORE: dict[str, tuple[int, int]] = {
 
 class Solution(SolutionABC):
     def _calc_score(self, part: int) -> int:
-        return sum([SCORE[line][part] for line in read_text(self._day).splitlines()])
+        return sum([SCORE[line][part] for line in self._data.splitlines()])
 
     def _part_a(self) -> str:
         return str(self._calc_score(part=0))  # 10941

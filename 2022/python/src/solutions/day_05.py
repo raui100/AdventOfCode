@@ -1,6 +1,5 @@
 from typing import NamedTuple
 
-from src.lib.parsing import read_text
 from src.lib.solution import SolutionABC
 
 
@@ -11,9 +10,8 @@ class Move(NamedTuple):
 
 
 class Solution(SolutionABC):
-    @staticmethod
-    def common_parse() -> (list[list[str]], list[Move]):
-        stack, movements = read_text(5).split("\n\n")
+    def common_parse(self) -> (list[list[str]], list[Move]):
+        stack, movements = self._data.split("\n\n")
         stacks: list[list[str]] = [[] for _ in stack.splitlines()]
         for line in stack.splitlines()[:-1][::-1]:  # Skipping first line and reversing order
             for ind in range(0, len(line), 4):  # Each group is 4 characters wide
