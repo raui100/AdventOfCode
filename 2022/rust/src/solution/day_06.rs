@@ -15,9 +15,8 @@ impl Day {
     pub fn solve(&self, window_size: usize) -> Option<usize> {
         self.data
             .windows(window_size)
-            .enumerate()
-            .find(|(_, window) | window.iter().all_unique())
-            .map(|(ind, _) | ind + window_size)
+            .position(|window| window.iter().all_unique())
+            .map(|ind| ind + window_size)
     }
 }
 
