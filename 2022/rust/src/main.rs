@@ -1,4 +1,5 @@
 #![feature(is_some_and)]
+#![feature(if_let_guard)]
 
 use crate::common::solution::Solution;
 
@@ -17,5 +18,6 @@ fn main() {
     if day == 4 || day == 0 { solution::day_04::Day::new().solution(); }
     if day == 5 || day == 0 { solution::day_05::Day::new().solution(); }
     if day == 6 || day == 0 { solution::day_06::Day::new().solution(); }
+    if day == 7 || day == 0 { solution::day_07::Day::new().solution(); }
 
 }

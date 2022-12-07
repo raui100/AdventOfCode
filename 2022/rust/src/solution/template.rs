@@ -12,7 +12,7 @@ impl Day {
 
 
 impl Solution for Day {
-    fn name(&self) -> &'static str { "Day 0: Insert title" }
+    fn name(&self) -> &'static str { todo!() }
 
     fn part_a(&self) -> Option<String> {
         None
