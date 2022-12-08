@@ -38,7 +38,7 @@ impl Solution for Day {
                 .filter(|&&size| size < 100_000)
                 .sum::<u32>();
 
-        Some(result.to_string())
+        Some(result.to_string()) // 2031851
 
     }
 
