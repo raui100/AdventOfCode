@@ -19,5 +19,6 @@ fn main() {
     if day == 5 || day == 0 { solution::day_05::Day::new().solution(); }
     if day == 6 || day == 0 { solution::day_06::Day::new().solution(); }
     if day == 7 || day == 0 { solution::day_07::Day::new().solution(); }
+    if day == 8 || day == 0 { solution::day_08::Day::new().solution(); }
 
 }

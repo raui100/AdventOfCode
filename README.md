@@ -14,6 +14,7 @@ I've linked a lot of resources to solve the different days
 [5](https://github.com/raui100/AdventOfCode/blob/master/2022/rust/src/solution/day_05.rs),
 [6](https://github.com/raui100/AdventOfCode/blob/master/2022/rust/src/solution/day_06.rs),
 [7](https://github.com/raui100/AdventOfCode/blob/master/2022/rust/src/solution/day_07.rs),
+[8](https://github.com/raui100/AdventOfCode/blob/master/2022/rust/src/solution/day_08.rs),
 ]
 
 [Python](https://github.com/raui100/AdventOfCode/tree/master/2022/python) solutions: [
