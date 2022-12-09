@@ -25,6 +25,7 @@ I've linked a lot of resources to solve the different days
 [5](https://github.com/raui100/AdventOfCode/blob/master/2022/python/src/solutions/day_05.py),
 [6](https://github.com/raui100/AdventOfCode/blob/master/2022/python/src/solutions/day_06.py),
 [7](https://github.com/raui100/AdventOfCode/blob/master/2022/python/src/solutions/day_07.py),
+[8](https://github.com/raui100/AdventOfCode/blob/master/2022/python/src/solutions/day_08.py),
 ]
 
 [TypeScript](https://github.com/raui100/AdventOfCode/tree/master/2022/typescript) solutions: [

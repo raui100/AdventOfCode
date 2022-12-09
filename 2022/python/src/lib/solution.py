@@ -5,9 +5,9 @@ from src.lib.parsing import read_text
 
 class SolutionABC(ABC):
     """Interface (abstract basic class) to ease implementation"""
-    def __init__(self, day: int):
+    def __init__(self, day: int, data: str = None):
         self._day = day
-        self._data = read_text(day)
+        self._data = read_text(day) if data is None else data
 
     def _part_a(self) -> str:
         """Solution to part B"""

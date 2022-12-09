@@ -27,3 +27,6 @@ if __name__ == "__main__":
 
     if day in [0, 7]:
         print(solutions.day_07.Solution(7).solution())
+
+    if day in [0, 8]:
+        print(solutions.day_08.Solution(8).solution())
