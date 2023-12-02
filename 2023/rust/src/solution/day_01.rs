@@ -1,38 +1,50 @@
-use crate::common::io::read_day;
-use crate::common::solution::Solution;
+use crate::common::{solution::Solution, parse::{parse_digit, parse_english_number}};
 
 pub struct Day {
-    num: Vec<(u32, u32)>,
-    num2: Vec<(u32, u32)>,
-}
-
-pub fn parse_nums(input: &str) -> Vec<(u32, u32)> {
-    let mut num = Vec::new();
-    for line in input.lines() {
-        let first = line.chars().find(|c| c.is_numeric()).map(|c| c.to_digit(10));
-        let last = line.chars().rev().find(|c| c.is_numeric()).map(|c| c.to_digit(10));
-        num.push((first.unwrap().unwrap(), last.unwrap().unwrap()));
-    }
-    num
+    input: String,
 }
 
 impl Day {
     pub fn new(input: String) -> Self {
-        let num = parse_nums(&input);
-        let input = input
-        .replace("one", "o1e")
-        .replace("two", "t2o")
-        .replace("three", "t3e")
-        .replace("four", "f4r")
-        .replace("five", "f5e")
-        .replace("six", "s6x")
-        .replace("seven", "s7n")
-        .replace("eight", "e8t")
-        .replace("nine", "n9e");
-        let num2 = parse_nums(&input);
-
-        Self { num, num2 }
+        Self {input}
     }
+
+    pub fn parse(&self, func: Vec<fn(&str) -> Option<u32>>) -> u32 {
+        let mut sum = 0;
+        let mut sub: String;  // reusing buffer
+        for line in self.input.lines() {
+            let len = line.len();
+            let (mut start, mut end) = (None, None);
+            'outer: for i in 1..=len {
+                sub = line.chars().take(i).collect();  // first i chars
+                for f in &func {
+                    if let Some(n) = f(&sub) {
+                        start = Some(n);
+                        break 'outer;
+                    }
+                }
+
+            }
+            'outer: for i in (0..len).rev() {
+                sub = line.chars().skip(i).collect();  // last i chars
+                for f in &func {
+                    if let Some(n) = f(&sub) {
+                        end = Some(n);
+                        break 'outer;
+                    }
+                }
+
+            }
+            if let (Some(start), Some(end)) = (start, end) {
+                sum += start * 10 + end;
+            } else {
+                panic!("{line}")
+            }
+        };
+        sum
+    }
+
+    
 }
 
 
@@ -42,11 +54,13 @@ impl Solution for Day {
      }
 
     fn part_a(&self) -> Option<String> {
-        self.num.iter().map(|(a, b)| a * 10 + b).sum::<u32>().to_string().into()
+        let sum = self.parse(vec![parse_digit]);
+        Some(sum.to_string())
     }
 
     fn part_b(&self) -> Option<String> {
-        self.num2.iter().map(|(a, b)| a * 10 + b).sum::<u32>().to_string().into()
+        let sum = self.parse(vec![parse_digit, parse_english_number]);
+        Some(sum.to_string())
     }
 }
 
@@ -58,6 +72,7 @@ mod tests {
         let day = Day::new(A.into());
         assert_eq!(day.part_a(), Some("142".to_owned()));
     }
+    #[test]
     fn b() {
         let day = Day::new(B.into());
         assert_eq!(day.part_b(), Some("281".to_owned()));
