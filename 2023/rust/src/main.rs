@@ -12,4 +12,5 @@ fn main() {
         .expect("Failed parsing the day. Example usage: cargo run -- 1");
 
     if day == 1 || day == 0 { solution::day_01::Day::new(read_day(1)).solution(); }
+    if day == 2 || day == 0 { solution::day_02::Day::new(read_day(2)).solution(); }
 }
