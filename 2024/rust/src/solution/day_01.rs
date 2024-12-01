@@ -8,8 +8,8 @@ use nom::{
 use crate::common::{deduplication::Deduplicated, solution::Solution};
 
 pub struct Day {
-    left: Deduplicated<u32>,
-    right: Deduplicated<u32>,
+    left: Deduplicated<usize>,
+    right: Deduplicated<usize>,
 }
 
 impl Solution for Day {
@@ -21,13 +21,13 @@ impl Solution for Day {
         let (_, numbers) = parse_input(input).unwrap();
 
         Self {
-            left: Deduplicated::from(numbers.iter().map(|v| v.0)),
-            right: Deduplicated::from(numbers.iter().map(|v| v.1)),
+            left: Deduplicated::from(numbers.iter().map(|v| v.0 as usize)),
+            right: Deduplicated::from(numbers.iter().map(|v| v.1 as usize)),
         }
     }
 
     fn part_a(&self) -> Option<String> {
-        let result: u32 = self
+        let result: usize = self
             .left
             .duplicated()
             .zip(self.right.duplicated())
@@ -38,11 +38,12 @@ impl Solution for Day {
     }
 
     fn part_b(&self) -> Option<String> {
-        let result: u32 = self
+        let result: usize = self
             .left
-            .duplicated()
-            .map(|l| *self.right.get(l).unwrap_or(&0) as u32 * l)
+            .iter()
+            .map(|(k, v)| self.right.get(k).unwrap_or(&0) * k * v)
             .sum();
+
         Some(result.to_string())
     }
 }
