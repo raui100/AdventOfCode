@@ -1,5 +1,3 @@
-use std::collections::BTreeMap;
-
 use nom::{
     character::complete::{self, line_ending, space1},
     multi::separated_list1,
@@ -7,11 +5,11 @@ use nom::{
     IResult,
 };
 
-use crate::common::solution::Solution;
+use crate::common::{deduplication::Deduplicated, solution::Solution};
 
 pub struct Day {
-    left: BTreeMap<u32, u32>,
-    right: BTreeMap<u32, u32>,
+    left: Deduplicated<u32>,
+    right: Deduplicated<u32>,
 }
 
 impl Solution for Day {
@@ -21,37 +19,34 @@ impl Solution for Day {
 
     fn new(input: &str) -> Self {
         let (_, numbers) = parse_input(input).unwrap();
-        let (mut left, mut right) = (BTreeMap::new(), BTreeMap::new());
-        for (l, r) in numbers {
-            *left.entry(l).or_insert(0u32) += 1;
-            *right.entry(r).or_insert(0u32) += 1;
+
+        Self {
+            left: Deduplicated::from(numbers.iter().map(|v| v.0)),
+            right: Deduplicated::from(numbers.iter().map(|v| v.1)),
         }
-        Self { left, right }
     }
 
     fn part_a(&self) -> Option<String> {
-        let left = repeated_tree(&self.left);
-        let right = repeated_tree(&self.right);
-        let result: u32 = left.zip(right).map(|(l, r)| (l.max(r) - l.min(r))).sum();
+        let result: u32 = self
+            .left
+            .duplicated()
+            .zip(self.right.duplicated())
+            .map(|(l, r)| (l.max(r) - l.min(r)))
+            .sum();
 
         Some(result.to_string())
     }
 
     fn part_b(&self) -> Option<String> {
-        // Counting the number of occurence in the right side of the list
-        let result: u32 = repeated_tree(&self.left)
-            .map(|l| l * self.right.get(l).unwrap_or(&0))
+        let result: u32 = self
+            .left
+            .duplicated()
+            .map(|l| *self.right.get(l).unwrap_or(&0) as u32 * l)
             .sum();
         Some(result.to_string())
     }
 }
 
-fn repeated_tree(tree: &BTreeMap<u32, u32>) -> impl Iterator<Item = &'_ u32> {
-    tree.iter()
-        .flat_map(|(k, &v)| std::iter::repeat_n(k, v as usize))
-}
-
-// Function to parse the whole input
 fn parse_input(input: &str) -> IResult<&str, Vec<(u32, u32)>> {
     separated_list1(line_ending, parse_row)(input)
 }
