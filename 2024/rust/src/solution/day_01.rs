@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 
 use nom::{
     character::complete::{self, line_ending, space1},
@@ -10,7 +10,8 @@ use nom::{
 use crate::common::solution::Solution;
 
 pub struct Day {
-    numbers: Vec<(u32, u32)>,
+    left: BTreeMap<u32, u32>,
+    right: BTreeMap<u32, u32>,
 }
 
 impl Solution for Day {
@@ -20,42 +21,34 @@ impl Solution for Day {
 
     fn new(input: &str) -> Self {
         let (_, numbers) = parse_input(input).unwrap();
-        Self { numbers }
+        let (mut left, mut right) = (BTreeMap::new(), BTreeMap::new());
+        for (l, r) in numbers {
+            *left.entry(l).or_insert(0u32) += 1;
+            *right.entry(r).or_insert(0u32) += 1;
+        }
+        Self { left, right }
     }
 
     fn part_a(&self) -> Option<String> {
-        let (mut left, mut right) = (Vec::new(), Vec::new());
-        for number in &self.numbers {
-            left.push(number.0);
-            right.push(number.1);
-        }
-        left.sort();
-        right.sort();
-        let result: u32 = left
-            .into_iter()
-            .zip(right)
-            .map(|(l, r)| u32::max(l, r) - u32::min(l, r))
-            .sum();
+        let left = repeated_tree(&self.left);
+        let right = repeated_tree(&self.right);
+        let result: u32 = left.zip(right).map(|(l, r)| (l.max(r) - l.min(r))).sum();
+
         Some(result.to_string())
     }
 
     fn part_b(&self) -> Option<String> {
         // Counting the number of occurence in the right side of the list
-        let mut right_count: HashMap<u32, u32> = HashMap::new();
-        for (_, num) in &self.numbers {
-            let value = right_count.entry(*num).or_insert(0);
-            *value += 1;
-        }
-
-        let mut result = 0;
-        for (num, _) in &self.numbers {
-            if let Some(count) = right_count.get(num) {
-                result += num * count
-            }
-        }
-
+        let result: u32 = repeated_tree(&self.left)
+            .map(|l| l * self.right.get(l).unwrap_or(&0))
+            .sum();
         Some(result.to_string())
     }
+}
+
+fn repeated_tree(tree: &BTreeMap<u32, u32>) -> impl Iterator<Item = &'_ u32> {
+    tree.iter()
+        .flat_map(|(k, &v)| std::iter::repeat_n(k, v as usize))
 }
 
 // Function to parse the whole input
