@@ -1,18 +1,16 @@
 use crate::common::io::read_day;
 use crate::common::solution::Solution;
 
-pub struct Day {
-    input: String,
-}
+pub struct Day {}
 
 impl Day {
-    pub fn new(input: String) -> Self {
-        Self { input }
+    pub fn new(input: &str) -> Self {
+        Self {}
     }
 }
 
 impl Solution for Day {
-    fn name(&self) -> &'static str {
+    fn name() -> &'static str {
         todo!()
     }
 
@@ -24,7 +22,6 @@ impl Solution for Day {
         None
     }
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -41,7 +38,7 @@ mod tests {
         assert_eq!(day.part_b(), None);
         // assert_eq!(day.part_b(), Some("".to_owned()));
     }
-    
+
     const A: &'static str = "";
     const B: &'static str = "";
 }
