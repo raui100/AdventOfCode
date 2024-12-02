@@ -4,3 +4,4 @@
 **.pytest_cache
 **/__pycache__
 **/Cargo.lock
+**/DS_Store
