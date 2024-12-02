@@ -1,12 +1,10 @@
-use std::default;
-
 use nom::{
-    character::complete::{self, line_ending, space1},
+    character::complete::{self, space1},
     multi::separated_list1,
     IResult,
 };
 
-use crate::common::solution::Solution;
+use crate::common::{parse::parse_input, solution::Solution};
 
 pub fn check_ordered<I: IntoIterator<Item = u32>>(it: I) -> bool {
     let mut it = it.into_iter();
@@ -45,7 +43,7 @@ impl Solution for Day2 {
     }
 
     fn new(input: &str) -> Self {
-        let (_, map) = parse_input(input).unwrap();
+        let (_, map) = parse_input(input, parse_row).unwrap();
         Self { map }
     }
 
@@ -71,10 +69,6 @@ impl Solution for Day2 {
         }
         Some(result.to_string())
     }
-}
-
-fn parse_input(input: &str) -> IResult<&str, Vec<Vec<u32>>> {
-    separated_list1(line_ending, parse_row)(input)
 }
 
 fn parse_row(input: &str) -> IResult<&str, Vec<u32>> {
