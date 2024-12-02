@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 use nom::{
     character::complete::{self, space1},
     multi::separated_list1,
@@ -6,28 +8,56 @@ use nom::{
 
 use crate::common::{parse::parse_input, solution::Solution};
 
-pub fn check_ordered<I: IntoIterator<Item = u32>>(it: I) -> bool {
+/// State machine to check for proper safety
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
+pub enum CheckSafety {
+    #[default]
+    Uninit,
+    One(u32),
+    Increase(u32, u32),
+    Decrease(u32, u32),
+    Unsafe,
+}
+
+impl CheckSafety {
+    pub fn check_ordered(self, n: u32) -> Self {
+        match self {
+            Self::Uninit => Self::One(n),
+            Self::One(a) => match n.cmp(&a) {
+                Ordering::Less => Self::Decrease(a, n),
+                Ordering::Equal => Self::Unsafe, // strictly increasing/decreasing only
+                Ordering::Greater => Self::Increase(a, n),
+            },
+            Self::Increase(_, a) => match n.cmp(&a) {
+                Ordering::Less | Ordering::Equal => Self::Unsafe,
+                Ordering::Greater => Self::Increase(a, n),
+            },
+            Self::Decrease(_, a) => match n.cmp(&a) {
+                Ordering::Less => Self::Decrease(a, n),
+                Ordering::Equal | Ordering::Greater => Self::Unsafe,
+            },
+            Self::Unsafe => Self::Unsafe,
+        }
+    }
+
+    pub fn check_distance(self, safe_distance: u32) -> Self {
+        match self {
+            Self::Increase(a, b) | Self::Decrease(a, b) => match a.abs_diff(b) <= safe_distance {
+                true => self,
+                false => Self::Unsafe,
+            },
+            _ => self,
+        }
+    }
+}
+
+pub fn safe_report<I: IntoIterator<Item = u32>>(it: I) -> bool {
     let mut it = it.into_iter();
-    if let Some(mut a) = it.next() {
-        let mut ord: Option<std::cmp::Ordering> = None;
-        while let Some(b) = it.next() {
-            // Check difference
-            if a.abs_diff(b) >= 4 {
-                return false;
-            }
-
-            // Check ordering
-            match ord {
-                Some(ord) => {
-                    if ord != a.cmp(&b) {
-                        return false;
-                    }
-                }
-                None if a == b => return false, // must be strictly ordered
-                None => ord = Some(a.cmp(&b)),
-            }
-
-            a = b;
+    let mut check = CheckSafety::default();
+    while let Some(n) = it.next() {
+        check = check.check_ordered(n).check_distance(3);
+        if check == CheckSafety::Unsafe {
+            return false;
         }
     }
     true
@@ -50,8 +80,11 @@ impl Solution for Day2 {
     fn part_a(&self) -> Option<String> {
         let mut result = 0;
         for row in self.map.clone() {
-            result += check_ordered(row) as u32;
+            if safe_report(row) {
+                result += 1;
+            }
         }
+
         Some(result.to_string())
     }
 
@@ -61,7 +94,7 @@ impl Solution for Day2 {
             for skip in 0..=row.len() {
                 let it = row.iter().copied();
                 let it = it.clone().take(skip).chain(it.skip(skip + 1));
-                if check_ordered(it) {
+                if safe_report(it) {
                     result += 1;
                     break;
                 }
