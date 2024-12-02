@@ -7,12 +7,12 @@ use nom::{
 
 use crate::common::{deduplication::Deduplicated, solution::Solution};
 
-pub struct Day {
+pub struct Day1 {
     left: Deduplicated<usize>,
     right: Deduplicated<usize>,
 }
 
-impl Solution for Day {
+impl Solution for Day1 {
     fn name() -> &'static str {
         "--- Day 1: Historian Hysteria ---"
     }
@@ -31,7 +31,7 @@ impl Solution for Day {
             .left
             .duplicated()
             .zip(self.right.duplicated())
-            .map(|(l, r)| (l.max(r) - l.min(r)))
+            .map(|(l, r)| (l.abs_diff(*r)))
             .sum();
 
         Some(result.to_string())
@@ -70,12 +70,12 @@ mod tests {
     }
     #[test]
     fn a() {
-        let day = Day::new(A);
+        let day = Day1::new(A);
         assert_eq!(day.part_a().unwrap(), "11");
     }
     #[test]
     fn b() {
-        let day = Day::new(A);
+        let day = Day1::new(A);
         assert_eq!(day.part_b().unwrap(), "31");
     }
 
