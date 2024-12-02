@@ -1,16 +1,20 @@
-use crate::common::io::read_day;
-use crate::common::solution::Solution;
+use nom::{
+    character::complete::{self, space1},
+    multi::separated_list1,
+    IResult,
+};
 
-pub struct Day {}
+use crate::common::{parse::parse_input, solution::Solution};
 
-impl Day {
-    pub fn new(input: &str) -> Self {
-        Self {}
-    }
-}
+pub struct DayX {}
 
-impl Solution for Day {
+impl Solution for DayX {
     fn name() -> &'static str {
+        todo!()
+    }
+
+    fn new(input: &str) -> Self {
+        let (_, _data) = parse_input(input, parse_row).unwrap();
         todo!()
     }
 
@@ -23,22 +27,23 @@ impl Solution for Day {
     }
 }
 
+fn parse_row(input: &str) -> IResult<&str, Vec<u32>> {
+    separated_list1(space1, complete::u32)(input)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
     #[test]
     fn a() {
-        let day = Day::new(A.into());
-        assert_eq!(day.part_a(), None);
-        // assert_eq!(day.part_a(), Some("".to_owned()));
+        let day = DayX::new(TEST_INPUT.into());
+        assert_eq!(day.part_a().unwrap(), "");
     }
     #[test]
     fn b() {
-        let day = Day::new(B.into());
-        assert_eq!(day.part_b(), None);
-        // assert_eq!(day.part_b(), Some("".to_owned()));
+        let day = DayX::new(TEST_INPUT.into());
+        assert_eq!(day.part_b().unwrap(), "");
     }
 
-    const A: &'static str = "";
-    const B: &'static str = "";
+    const TEST_INPUT: &'static str = "";
 }
