@@ -52,9 +52,8 @@ impl CheckSafety {
 }
 
 pub fn safe_report<I: IntoIterator<Item = u32>>(it: I) -> bool {
-    let mut it = it.into_iter();
     let mut check = CheckSafety::default();
-    while let Some(n) = it.next() {
+    for n in it {
         check = check.check_ordered(n).check_distance(3);
         if check == CheckSafety::Unsafe {
             return false;
